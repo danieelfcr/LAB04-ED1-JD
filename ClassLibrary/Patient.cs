@@ -19,7 +19,8 @@ namespace ClassLibrary
         public string EntryMethod { get; set; }
         [Required]
         public DateTime EntryDate { get; set; }
-
+      
         public int Priority { get; set; }
+
     }
 }

@@ -7,8 +7,9 @@ namespace ClassLibrary
     interface IPriorityQueue<T>
     {
         
-        bool IsEmpty(Node<T> root);
-        void Add(Node<T> root);
+        bool IsEmpty();
+        Node<T> Add(Node<T> root, Node<T> node);
+        void Swap(ref Node<T> parent, ref Node<T> node);
         void Remove(Node<T> root);
 
         Node<T> Peek(Node<T> root);

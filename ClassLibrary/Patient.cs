@@ -11,5 +11,7 @@ namespace ClassLibrary
         public int Specialization { get; set; }
         public string EntryMethod { get; set; }
 
+        public DateTime EntryTime { get; set; }
+
     }
 }

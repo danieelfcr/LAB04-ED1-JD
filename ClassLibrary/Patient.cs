@@ -7,7 +7,7 @@ namespace ClassLibrary
         public string Names { get; set; }
         public string LastNames { get; set; }
         public string Sex { get; set; }
-        public int Age { get; set; }
+        public DateTime BirthDate { get; set; }
         public int Specialization { get; set; }
         public string EntryMethod { get; set; }
 

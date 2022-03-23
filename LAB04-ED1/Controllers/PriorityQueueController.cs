@@ -25,7 +25,7 @@ namespace LAB04_ED1.Controllers
         // GET: PriorityQueueController/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Patient());
         }
 
         // POST: PriorityQueueController/Create
@@ -56,6 +56,16 @@ namespace LAB04_ED1.Controllers
         {
             try
             {
+                Patient patient = new Patient
+                {
+                    Names = collection["Names"],
+                    LastNames = collection["LastNames"],
+                    Age = Convert.ToInt16(collection["BirthDate"]),
+                    Sex = collection["Sex"],
+                    Specialization = collection["Specialization"],
+                    EntryMethod = collection["Names"],
+                    EntryDate = Convert.ToDateTime(collection["EntryDate"])
+                };
                 return RedirectToAction(nameof(Index));
             }
             catch

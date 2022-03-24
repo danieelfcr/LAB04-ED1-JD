@@ -12,6 +12,6 @@ namespace ClassLibrary
         void Swap(ref Node<T> parent, ref Node<T> node);
         void Remove(Node<T> root);
 
-        Node<T> Peek(Node<T> root);
+        Node<T> Peek();
     }
 }

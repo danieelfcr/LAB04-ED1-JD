@@ -6,6 +6,7 @@ namespace ClassLibrary
     public class Patient
     {
         [Required]
+        public int ID { get; set; }
         public string Names { get; set; }
         [Required]
         public string LastNames { get; set; }
@@ -19,7 +20,6 @@ namespace ClassLibrary
         public string EntryMethod { get; set; }
         [Required]
         public DateTime EntryDate { get; set; }
-      
         public int Priority { get; set; }
 
     }

@@ -4,14 +4,21 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Patients</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-controller="PriorityQueue" asp-action="Peek" method="post" enctype="multipart/form-data">
+    <button class="btn-dark" value="buttonClick" >Current patient</button>
+</form>
+
+
 <table class="table">
     <thead>
         <tr>
+
             <th>
                 @Html.DisplayNameFor(model => model.Names)
             </th>
@@ -33,12 +40,19 @@
             <th>
                 @Html.DisplayNameFor(model => model.EntryDate)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Priority)
+            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @{ if (Model != null)
+                @foreach (var item in Model)
+                {
         <tr>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Names)
             </td>
@@ -58,14 +72,23 @@
                 @Html.DisplayFor(modelItem => item.EntryMethod)
             </td>
             <td>
-                @Html.DisplayNameFor(model => model.EntryDate)
+                @Html.DisplayFor(modelItem => item.EntryDate)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </td>
+
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
-}
+
+
+
+                }
+
+        }
     </tbody>
 </table>

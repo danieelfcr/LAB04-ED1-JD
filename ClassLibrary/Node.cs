@@ -4,16 +4,16 @@ using System.Text;
 
 namespace ClassLibrary
 {
-    class Node<T>
+    public class Node<T>
     {
-        public T Data { get; set; }
+        public T Record { get; set; }
         public Node<T> Parent { get; set; }
         public Node<T> Left { get; set; }
         public Node<T> Right { get; set; }
 
-        public Node(T Data)
+        public Node(T Record)
         {
-            this.Data = Data;
+            this.Record = Record;
             Left = Right = null;
         }
 

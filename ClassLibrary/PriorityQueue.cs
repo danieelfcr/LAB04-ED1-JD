@@ -4,15 +4,18 @@ using System.Text;
 
 namespace ClassLibrary
 {
-    class PriorityQueue<T> : IPriorityQueue<T>
+    public class PriorityQueue<T> : IPriorityQueue<T>
     {
         public Node<T> Root;
         public Queue<Node<T>> NodesToVisit = new Queue<Node<T>>();
+        public List<T> NodeList = new List<T>();
+
         public Func<T, T, int> PriorityComparer;
         public Action<Node<T>, Node<T>> swapNodes;
         
         public PriorityQueue(Func<T, T, int> comparer, Action<Node<T>, Node<T>> swapNodes)
         {
+            
             PriorityComparer = comparer;
             this.swapNodes = swapNodes;
         }
@@ -28,6 +31,7 @@ namespace ClassLibrary
             {
                 root = node;
                 NodesToVisit.Enqueue(root);
+                NodeList.Add(root.Record);
             }
             else
             {
@@ -37,12 +41,12 @@ namespace ClassLibrary
                     aux.Left = Add(aux.Left, node);
                     aux.Left.Parent = aux;
 
-                    if (PriorityComparer(aux.Data, aux.Left.Data) == -1)
+                    if (PriorityComparer(aux.Record, aux.Left.Record) == -1)
                     {
                         var auxLeft = aux.Left;
                         Swap(ref aux, ref auxLeft);
                     }
-                    else if (PriorityComparer(aux.Data, aux.Left.Data) == 0)
+                    else if (PriorityComparer(aux.Record, aux.Left.Record) == 0)
                     {
 
                     }
@@ -52,12 +56,12 @@ namespace ClassLibrary
                     aux.Right = Add(aux.Right, node);
                     aux.Right.Parent = aux;
 
-                    if (PriorityComparer(aux.Data, aux.Right.Data) == -1)
+                    if (PriorityComparer(aux.Record, aux.Right.Record) == -1)
                     {
                         var auxRight = aux.Right;
                         Swap(ref aux, ref auxRight);
                     }
-                    else if (PriorityComparer(aux.Data, aux.Right.Data) == 0)
+                    else if (PriorityComparer(aux.Record, aux.Right.Record) == 0)
                     {
 
                     }
@@ -84,15 +88,16 @@ namespace ClassLibrary
         }
 
 
+        
 
         public void Remove(Node<T> root)
         {
 
         }
 
-        public Node<T> Peek(Node<T> root)
+        public Node<T> Peek()
         {
-            throw new NotImplementedException();
+            return Root;
         }
     }
 }

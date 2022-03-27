@@ -9,6 +9,18 @@
 <h4>Patient</h4>
 <hr />
 
+@{
+    string day = DateTime.Now.Day.ToString();
+    string month = DateTime.Now.Month.ToString();
+    if (DateTime.Now.Day < 10)
+        day = day.Insert(0, "0");
+    if (DateTime.Now.Month < 10)
+        month = month.Insert(0, "0");
+
+
+    string Today = $"{DateTime.Now.Year.ToString()}-{month}-{day}";
+}
+
 
 
 <div class="row">
@@ -25,56 +37,62 @@
                 <input asp-for="LastNames" class="form-control" />
                 <span asp-validation-for="LastNames" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Sex" class="control-label"></label><br />
-                <select asp-for="Sex" class="bg-dark text-white">
-                    <option value="Male" selected>Male</option>
-                    <option value="Female">Female</option>                  
+                <label asp-for="Sex"></label>
+                <select asp-for="Sex" class="form-control bg-dark text-white">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                 </select>
-
+                <span asp-validation-for="Sex" class="text-danger"></span>
             </div>
-                <div class="form-group">
-                    <label asp-for="Age" class="control-label"></label>
-                    <input asp-for="Age" class="form-control" />
-                    <span asp-validation-for="Age" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Specialization" class="control-label"></label><br />    
-                    <select asp-for="Specialization" class="bg-dark text-white">
-                        <option value="Internal traumatology" selected>Internal traumatology</option>
-                        <option value="Exposed traumatology">Exposed traumatology</option>
-                        <option value="Gynecology">Gynecology</option>
-                        <option value="Cardiology">Cardiology</option>
-                        <option value="Pneumology">Pneumology</option>
-                        
-                    </select>
-                </div>
-                <div class="form-group">
-                    
-                    <label asp-for="EntryMethod" class="control-label"></label><br />
-                    <select asp-for="EntryMethod" class="bg-dark text-white">
-                        <option value="Ambulance" selected>Ambulance</option>
-                        <option value="Assisted">Assisted</option>
-                        
 
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label asp-for="EntryDate" class="control-label"></label>
-                    <input type="date" asp-for="EntryDate" class="form-control" />
-                    <span asp-validation-for="EntryDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
+
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input type="date" min="1900-01-01" value="@Today" max="@Today" asp-for="BirthDate" class="form-control" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+
+ 
+            <div class="form-group">
+                <label asp-for="Specialization"></label>
+                <select asp-for="Specialization" class="form-control bg-dark text-white">
+                    <option value="Internal traumatology" selected>Internal traumatology</option>
+                    <option value="Exposed traumatology">Exposed traumatology</option>
+                    <option value="Gynecology">Gynecology</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Pneumology">Pneumology</option>
+                </select>
+                <span asp-validation-for="Specialization" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EntryMethod"></label>
+                <select asp-for="EntryMethod" class="form-control bg-dark text-white">
+                    <option value="Ambulance" selected>Ambulance</option>
+                    <option value="Assisted">Assisted</option>
+                </select>
+                <span asp-validation-for="EntryMethod" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EntryDate" class="control-label"></label>
+                <input type="date" max="@Today" value="@Today" asp-for="EntryDate" class="form-control" />
+                <span asp-validation-for="EntryDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
+</div>
 
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -5,13 +5,20 @@ namespace ClassLibrary
 {
     public class Patient
     {
-        [Required]
+        
         public int ID { get; set; }
+        [Required]
         public string Names { get; set; }
         [Required]
         public string LastNames { get; set; }
+
         [Required]
         public string Sex { get; set; }
+
+        [Required]
+        public DateTime BirthDate { get; set; }
+
+        [Required]
         [Range (0,120)]
         public int Age { get; set; }
         [Required]

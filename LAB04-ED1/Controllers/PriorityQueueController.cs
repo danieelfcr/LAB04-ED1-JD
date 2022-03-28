@@ -115,7 +115,8 @@ namespace LAB04_ED1.Controllers
                 {
                     Names = collection["Names"],
                     LastNames = collection["LastNames"],
-                    Age = Convert.ToInt16(collection["Age"]),
+                    BirthDate = Convert.ToDateTime(collection["BirthDate"]),
+                    Age = (DateTime.Now.Year - Convert.ToDateTime(collection["BirthDate"]).Year),
                     Sex = collection["Sex"],
                     Specialization = collection["Specialization"],
                     EntryMethod = collection["EntryMethod"],

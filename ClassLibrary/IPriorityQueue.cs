@@ -10,7 +10,7 @@ namespace ClassLibrary
         bool IsEmpty();
         Node<T> Add(Node<T> root, Node<T> node);
         void Swap(ref Node<T> parent, ref Node<T> node);
-        void Remove(Node<T> root);
+        void Remove();
 
         Node<T> Peek();
     }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ClassLibrary;
 using LAB04_ED1.Helpers;
 
+
 namespace LAB04_ED1.Controllers
 {
     public class PriorityQueueController : Controller
@@ -58,24 +59,20 @@ namespace LAB04_ED1.Controllers
 
         };
 
-        public Func<Patient, int> ID_Generator = (patient) =>
-        {
-            Random rnd = new Random(DateTime.Now.Second);
-            return rnd.Next(1, 100);
 
-        };
+
+
 
 
 
         // GET: PriorityQueueController
         public ActionResult Index()
         {
-            if (Data.Instance.PatientQueue.NodeList != null && Data.Instance.PatientQueue.NodeList.Count != 0)
-                return View(Data.Instance.PatientQueue.NodeList);
-            else 
-                return View();
+            Data.Instance.OutputPatientQueue = Data.Instance.PatientQueue.deepCopy();
+            Data.Instance.OutputPatientQueue.swapNodes = Data.Instance.PatientQueue.swapNodes;
+            Data.Instance.OutputPatientQueue.PriorityComparer = Data.Instance.PatientQueue.PriorityComparer;
             
-
+            return View(Data.Instance.OutputPatientQueue.GetNodeList(Data.Instance.OutputPatientQueue.Root));  
         }
 
        
@@ -113,6 +110,7 @@ namespace LAB04_ED1.Controllers
             {
                 Patient patient = new Patient
                 {
+                  
                     Names = collection["Names"],
                     LastNames = collection["LastNames"],
                     BirthDate = Convert.ToDateTime(collection["BirthDate"]),
@@ -120,12 +118,14 @@ namespace LAB04_ED1.Controllers
                     Sex = collection["Sex"],
                     Specialization = collection["Specialization"],
                     EntryMethod = collection["EntryMethod"],
-                    EntryDate = Convert.ToDateTime(collection["EntryDate"])
+                    EntryDate = Convert.ToDateTime(collection["EntryDate"]),
+                    EntryTime = collection["EntryTime"]
                 };
 
                 patient.Priority = PriorityCalculator(patient);
 
                 Node<Patient> NewNode = new Node<Patient>(patient);
+                NewNode.IsNull = 0;
                 Data.Instance.PatientQueue.Root = Data.Instance.PatientQueue.Add(Data.Instance.PatientQueue.Root, NewNode);
 
                 return RedirectToAction(nameof(Index));
@@ -135,6 +135,15 @@ namespace LAB04_ED1.Controllers
                 return View();
             }
         }
+
+        public ActionResult Remove()
+        {
+            Data.Instance.PatientQueue.Remove();
+           
+
+            return RedirectToAction(nameof(Index));
+        }
+
 
         // GET: PriorityQueueController/Edit/5
         public ActionResult Edit(int id)

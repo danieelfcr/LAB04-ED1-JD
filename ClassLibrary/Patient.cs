@@ -3,10 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ClassLibrary
 {
+    [Serializable]
     public class Patient
     {
         
-        public int ID { get; set; }
+        
         [Required]
         public string Names { get; set; }
         [Required]
@@ -27,6 +28,8 @@ namespace ClassLibrary
         public string EntryMethod { get; set; }
         [Required]
         public DateTime EntryDate { get; set; }
+
+        public string EntryTime { get; set; }
         public int Priority { get; set; }
 
     }
